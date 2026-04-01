@@ -8,12 +8,9 @@ import io.cucumber.java.en.Then;
 public class ATV_HomeStep {
     ATV_HomeFunc atv_homaPageFunc = new ATV_HomeFunc();
 
-    @Given("User launches the app")
-    public void userLaunchesTheApp() {
+    @Given("User launches the sony app")
+    public void userLaunchesTheSonyApp() throws InterruptedException {
         atv_homaPageFunc.launchApp();
-    }
-    @Given("User send message through app")
-    public void user_send_message_through_app() {
-
+        Thread.sleep(30000);
     }
 }

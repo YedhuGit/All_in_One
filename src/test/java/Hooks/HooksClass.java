@@ -3,6 +3,10 @@ package Hooks;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -15,8 +19,7 @@ public class HooksClass {
     public static AppiumDriverLocalService service;
 
 
-
-    public static void initializeDriver(String platformName, String osversion,String deviceName, String appiumPort, String userType ) throws MalformedURLException {
+    public static void initializeDriver(String platformName, String osversion, String deviceName, String appiumPort, String userType ) throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("platformName",platformName);
         desiredCapabilities.setCapability("platformVersion",osversion);
@@ -24,7 +27,8 @@ public class HooksClass {
         desiredCapabilities.setCapability("automationName","UiAutomator2");
         desiredCapabilities.setCapability("appPackage","com.sonyliv");
         desiredCapabilities.setCapability("appActivity","ui.splash.SplashActivity");
-        desiredCapabilities.setCapability("app","/Users/yedhukv/IdeaProjects/All_in_One_Automation/src/main/java/AndroidTV/Utilities/Apps/ATV_Prod_SP104_105_QA_INSP_INC1_REL_VC10684_V_6_12_81_T_291020241241_Debug (1).apk");
+        desiredCapabilities.setCapability("app","/Users/yedhukv/IdeaProjects/All_in_One_SubBranch1/src/main/java/AndroidTV/Utilities/Apps/ATV_Prod_SP104_105_QA_INSP_INC1_REL_VC10684_V_6_12_81_T_291020241241_Debug (1).apk");
+        System.out.println("http://127.0.0.1:"+appiumPort);
         driver = new AndroidDriver(new URL("http://127.0.0.1:"+appiumPort),desiredCapabilities);
     }
 
@@ -42,6 +46,22 @@ public class HooksClass {
         service.stop();
         System.out.println("Appium server stopped with port "+port);
     }
-
+    public static void web_platform_driver_init(String browser){
+        switch (browser.toLowerCase()){
+            case "chrome":
+                System.out.println("chrome");
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+            case "firefox":
+                System.out.println("firefox");
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported browser : "+ browser);
+        }
+        driver.manage().window().maximize();
+    }
 
 }
