@@ -13,6 +13,7 @@
   <name>All_in_One_Automation</name>
   <url>http://maven.apache.org</url>
 
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>

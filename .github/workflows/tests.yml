@@ -27,4 +27,4 @@ jobs:
           sudo apt-get install -y google-chrome-stable
 
       - name: Run Tests with Maven
-        run: mvn test -Dbrowser=chrome -Dheadless=true
+        run: mvn test -DsuiteXmlFile=testng.xml -Dheadless=true
